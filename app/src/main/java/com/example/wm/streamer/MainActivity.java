@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,13 +24,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     SurfaceHolder surfaceHolder1;
     SurfaceView playerSurfaceView1;
     String videoSrcLocal = "rtsp://192.168.1.9:554/user=admin&password=dziennik&channel=1&stream=1.sdp?real_stream--rtp-caching=100"; //works well
-    //   String videoSrcRemote = "rtsp://wmalecki1.zapto.org:554/user=admin&password=dziennik&channel=1&stream=1.sdp?real_stream--rtp-caching=100";//works well
+    //   String videoSrcRemote = "rtsp://wmalecki1.zapto.org:554/user=admin&password=dziennik&channel=1&stream=1.sdp?real_stream--rtp-caching=100";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        this.setContentView(R.layout.activity_main);
 
         playerSurfaceView1 = findViewById(R.id.videoView);
         surfaceHolder1 = playerSurfaceView1.getHolder();
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 //        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 //                | View.SYSTEM_UI_FLAG_FULLSCREEN;
 //        decorView.setSystemUiVisibility(uiOptions);
-
     }
 
     public void stream1(View view) {
@@ -67,17 +69,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mediaPlayer1.setOnErrorListener(this);
 
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -101,6 +99,4 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mp = this.mediaPlayer1;
         percent = 90;
     }
-
-
 }

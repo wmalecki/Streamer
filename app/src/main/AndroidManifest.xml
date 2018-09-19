@@ -2,20 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wm.streamer">
 
+    <!-- Required permissions for RTP video streaming. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--suppress AndroidDomInspection -->
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:theme="@style/MyStyle"
+        android:allowBackup="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true">
+
+
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Stream1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_stream1"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.wm.streamer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
+
+    <!--android:theme="@style/Base.Theme.AppCompat"-->
